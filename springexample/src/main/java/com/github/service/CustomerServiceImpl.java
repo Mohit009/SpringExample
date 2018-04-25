@@ -3,17 +3,19 @@ package com.github.service;
 import com.github.model.Customer;
 import com.github.repository.HibernateCustomerRepository;
 import com.github.repository.HibernateCustomerRepositoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.SingletonBeanRegistry;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service("customerService")
 public class CustomerServiceImpl implements CustomerService {
 
-    public HibernateCustomerRepository getHibernateCustomerRepository() {
-        return hibernateCustomerRepository;
-    }
-
-    public void setHibernateCustomerRepository(HibernateCustomerRepository hibernateCustomerRepository) {
-        this.hibernateCustomerRepository = hibernateCustomerRepository;
+    @Autowired
+    public CustomerServiceImpl(HibernateCustomerRepository repository) {
+        this.hibernateCustomerRepository = repository;
     }
 
     private HibernateCustomerRepository hibernateCustomerRepository;
